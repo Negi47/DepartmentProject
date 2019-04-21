@@ -1,0 +1,23 @@
+.signup_form{
+    width: 22%;
+    padding: 2% 10% 2% 4%;
+    margin: auto;
+    margin-top: 2%;
+    background-color: white;
+    box-shadow: 0 0 4px #adb5bd;
+}
+
+.signup_label{
+    margin: 8% 12% 14% 0%;
+    padding: 1% 10% 10% 7%;
+    font-family: inherit;
+    font-weight: 400;
+}
+
+.sub_btn{
+    padding: 2% 12% 7% 12%;
+    /* margin: 19% 0% 0% 67%; */
+    font-family: inherit;
+    /* margin-left: 57%; */
+    font-weight: 400;
+}

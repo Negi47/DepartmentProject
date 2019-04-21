@@ -1,0 +1,27 @@
+.first_div{
+    border: 1px solid black;
+    margin: 3% 0% 0% 15%;
+    padding: 2% 0% 2% 2%;
+    width: 70%;
+    background-color: white;
+    box-shadow: 0 0 4px #adb5bd;
+}
+.diary_text{
+    /* margin: 8% 12% 14% 0%; */
+    padding: 1% 7% 3% 1%;
+    font-family: inherit;
+    font-weight: 400;
+}
+.sub_btn{
+    padding: 1% 1% 1% 1%;
+    /* margin: 19% 0% 0% 67%; */
+    font-family: inherit;
+    /* margin-left: 57%; */
+    font-weight: 400;
+}
+
+table, th, td, tr {
+    border: 1px solid black;
+    margin-left: 20%;
+    padding: 1% 0% 1% 1%; 
+  }

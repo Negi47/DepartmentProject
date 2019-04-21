@@ -1,0 +1,15 @@
+.nav-wrapper{
+    background-color: #201E3E;
+}
+.head{
+    color: white;
+    /* margin-left: 52%;
+    margin-right: -52%; */
+    font-size: x-large;
+    margin-left: 340px;
+}
+img{
+    width: 12%;
+    padding-top: 0.6%;
+    margin-left: 0.5%;
+}

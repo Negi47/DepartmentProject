@@ -1,0 +1,29 @@
+.login_form{
+    border: 1px solid black;
+    margin: 5% 0% 0% 36%;
+    padding: 1% 4% 3% 0%;
+    width: 27%;
+    background-color: white;
+    box-shadow: 0 0 4px #adb5bd;
+}
+
+#label_lgn {
+    margin: auto;
+    padding: inherit;
+    margin-left: 19%;
+}
+
+#icon{
+    margin: auto;
+    margin-left: 89%;
+}
+
+
+/* #icon_prefix, #icon_password{
+    border: 1px solid black;
+    padding-left: 2%;
+} */
+
+#lgn_button{
+    margin-left: 15%;
+}
