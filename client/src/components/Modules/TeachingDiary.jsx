@@ -24,14 +24,14 @@ class TeachingDiary extends Component{
 
     handleFormChange = (e) => {
 
-        console.log(e.target.type);
+        console.log('handleFormChange', e.target.type);
 
         if (e.target.type == "checkbox") {
             if (e.target.checked) {
                 switch (e.target.name) {
                     case "mon":
                         this.setState({
-                            mon: [...this.state.mon, e.target.value]
+                            mon: false
                         })
                         break;
 
@@ -170,27 +170,28 @@ class TeachingDiary extends Component{
             <div>
                 <center>
                     <label>Department of Computer pplication</label><br/>
-                    <label class="teaching">GENERATE TEACHING DIARY</label>
+                    <label className="teaching">GENERATE TEACHING DIARY</label>
                 </center>
-                <div class="first_div">
+                <div className="first_div">
                     <form onSubmit={e => this.submitUser(e)}>
-                        <label class="diary_text">Semester: </label>
+                        <label className="diary_text">Semester: </label>
                             <input type="text" name="semester" onChange={this.handleFormChange} />
-                        <label class="diary_text">Section: </label>
+                        <label className="diary_text">Section: </label>
                             <input type="text" name="section" onChange={this.handleFormChange} />
-                        <label class="diary_text">Term: </label>
+                        <label className="diary_text">Term: </label>
                             <input type="text" name="term" onChange={this.handleFormChange} />
-                        <label class="diary_text">Credits: </label>
+                        <label className="diary_text">Credits: </label>
                             <input type="text" name="credits" onChange={this.handleFormChange} />
-                        <label class="diary_text">Name of the faculty: </label>
+                        <label className="diary_text">Name of the faculty: </label>
                             <input type="text" name="facultyname" onChange={this.handleFormChange} />
-                        <label class="diary_text">Total no. of hours: </label>
+                        <label className="diary_text">Total no. of hours: </label>
                             <input type="text" name="totalhours" onChange={this.handleFormChange} />
                             
                             {/* Time Table */}
-                            <br></br>
-                            <div class ="second_div">
-                                <table>
+                            <br/>
+                            <div className="second_div">
+                                <table id="table">
+                                <tbody>
                                     <tr>
                                         <th></th>
                                         <th>9:00-9:55</th>
@@ -203,67 +204,68 @@ class TeachingDiary extends Component{
                                     </tr>    
                                     <tr>
                                         <td>Monday</td>
-                                        <td><input type="checkbox" name="mon" value="9:00 - 9:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="mon" value="9:55-10:50" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="mon" value="11:05-12:00" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="mon" value="12:00-12:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="mon" value="1:45-2:40" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="mon" value="2:40-3:35" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="mon" value="3:55-4:30" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="mon" onClick={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="mon" value="9:55-10:50" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="mon" value="11:05-12:00" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="mon" value="12:00-12:55" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="mon" value="1:45-2:40" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="mon" value="2:40-3:35" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="mon" value="3:55-4:30" onChange={this.handleFormChange}/></td>
                                     </tr>
                                     <tr>
                                         <td>Tuesday</td>
-                                        <td><input type="checkbox" name="tue" value="9:00 - 9:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="tue" value="9:55-10:50" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="tue" value="11:05-12:00" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="tue" value="12:00-12:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="tue" value="1:45-2:40" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="tue" value="2:40-3:35" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="tue" value="3:55-4:30" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="tue" value="9:00 - 9:55" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="tue" value="9:55-10:50" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="tue" value="11:05-12:00" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="tue" value="12:00-12:55" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="tue" value="1:45-2:40" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="tue" value="2:40-3:35" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="tue" value="3:55-4:30" onChange={this.handleFormChange}/></td>
                                     </tr>
                                     <tr>
                                         <td>Wensday</td>
-                                        <td><input type="checkbox" name="wed" value="9:00-9:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="wed" value="9:55-10:50" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="wed" value="11:05-12:00" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="wed" value="12:00-12:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="wed" value="1:45-2:40" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="wed" value="2:40-3:35" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="wed" value="3:55-4:30" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="wed" value="9:00-9:55" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="wed" value="9:55-10:50" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="wed" value="11:05-12:00" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="wed" value="12:00-12:55" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="wed" value="1:45-2:40" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="wed" value="2:40-3:35" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="wed" value="3:55-4:30" onChange={this.handleFormChange}/></td>
                                     </tr>
                                     <tr>
                                         <td>Thursday</td>
-                                        <td><input type="checkbox" name="thu" value="9:00 - 9:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="thu" value="9:55-10:50" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="thu" value="11:05-12:00" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="thu" value="12:00-12:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="thu" value="1:45-2:40" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="thu" value="2:40-3:35" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="thu" value="3:55-4:30" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="thu" value="9:00 - 9:55" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="thu" value="9:55-10:50" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="thu" value="11:05-12:00" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="thu" value="12:00-12:55" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="thu" value="1:45-2:40" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="thu" value="2:40-3:35" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="thu" value="3:55-4:30" onChange={this.handleFormChange}/></td>
                                     </tr>
                                     <tr>
                                         <td>Friday</td>
-                                        <td><input type="checkbox" name="fri" value="9:00 - 9:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="fri" value="9:55-10:50" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="fri" value="11:05-12:00" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="fri" value="12:00-12:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="fri" value="1:45-2:40" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="fri" value="2:40-3:35" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="fri" value="3:55-4:30" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="fri" value="9:00 - 9:55" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="fri" value="9:55-10:50" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="fri" value="11:05-12:00" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="fri" value="12:00-12:55" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="fri" value="1:45-2:40" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="fri" value="2:40-3:35" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="fri" value="3:55-4:30" onChange={this.handleFormChange}/></td>
                                     </tr>
                                     <tr>
                                         <td>Saturday</td>
-                                        <td><input type="checkbox" name="sat" value="9:00 - 9:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="sat" value="9:55-10:50" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="sat" value="11:05-12:00" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="sat" value="12:00-12:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="sat" value="1:45-2:40" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="sat" value="2:40-3:35" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" name="sat" value="3:55-4:30" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="sat" value="9:00 - 9:55" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="sat" value="9:55-10:50" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="sat" value="11:05-12:00" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="sat" value="12:00-12:55" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="sat" value="1:45-2:40" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="sat" value="2:40-3:35" onChange={this.handleFormChange}/></td>
+                                        <td><input type="checkbox" className="check" name="sat" value="3:55-4:30" onChange={this.handleFormChange}/></td>
                                     </tr>
+                                    </tbody>
                                 </table>
                             </div>
-                        <button type="submit" class="sub_btn">Submit</button>
+                        <button type="submit" className="sub_btn">Submit</button>
                     </form>
                 </div>
                 

@@ -1,11 +1,14 @@
 import React, {Component} from 'react'
 import "../../styles/Header.css"
 import axios from 'axios';
+import $ from 'jquery'
+import { AuthContext } from '../../Context/Context';
 
 class Header extends Component {
 
     state = {
-        isSession: sessionStorage.getItem('username') ? true : false
+        // isSession: sessionStorage.getItem('username') ? true : false,
+        isVisible: false
     }
 
 
@@ -14,25 +17,45 @@ class Header extends Component {
         this.setState({isSession: false})
     }
 
+    changeLogoutVisible = () => {
+        if (!this.state.isVisible) {
+            document.addEventListener('click', this.outsideMenuClick)
+        }
+            
+        else
+            document.removeEventListener('click', this.outsideMenuClick)
+
+        this.setState({isVisible: !this.state.isVisible})
+    }
+
+    outsideMenuClick = () => this.changeLogoutVisible()
+
+
+    static contextType = AuthContext
 
     render() {
+
+
+        const {isSession} = this.context;
+
         return(
             <div>
                 {
-                    this.state.isSession ?
-                        <ul id="logoutdropdown" className="dropdown-content">
-                            <li><button onClick={this.logout}>Logout</button></li>
+                    isSession ?
+                        <ul className="logoutbtn" style={this.state.isVisible ? {display: "block"} : null}>
+                            <li><button onClick={this.logout}  >Logout</button></li>
                         </ul> :
                          null
                 }
-                <nav>
+                <nav className="Heder">
                     <div className="nav-wrapper">
                         <div>
                             <img src={process.env.PUBLIC_URL + "/images/brand.png"}></img>
                             <span className="brand-logo center">RAMAIAH INSTITUTE OF TECHNOLOGY</span>
                             <ul className="right">
                                 <li>
-                                    <span className="dropdown-trigger" data-target="logoutdropdown"><i className="material-icons">account_circle</i></span>
+                                    <span 
+                                        onClick={this.changeLogoutVisible}><i className="material-icons">account_circle</i></span>
                                 </li>
                             </ul>
                         </div>

@@ -25,3 +25,11 @@ table, th, td, tr {
     margin-left: 20%;
     padding: 1% 0% 1% 1%; 
   }
+
+.check { 
+    opacity: 1 !important;
+}
+
+#table{
+    margin:auto;
+}

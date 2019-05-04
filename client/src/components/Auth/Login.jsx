@@ -2,6 +2,7 @@ import React, {Component,Fragment} from 'react'
 import axios from 'axios'
 import {Redirect} from 'react-router-dom'
 import "../../styles/Login.css"
+import { AuthContext } from '../../Context/Context';
 
 
 class Login extends Component {
@@ -19,7 +20,7 @@ class Login extends Component {
         })
     }
 
-    submitUser = (e) => {
+    submitUser = (e, handleSessionUpdate) => {
         e.preventDefault()
 
         axios.post('/user/searchuser', {
@@ -31,6 +32,7 @@ class Login extends Component {
                 this.setState({popupmsg: "err in login", isLoggedIn: false})
             else {
                 sessionStorage.setItem('username', res.data.username)
+                handleSessionUpdate()
                 this.setState({isLoggedIn: true})
             } 
                 
@@ -39,7 +41,14 @@ class Login extends Component {
 
       }
 
+
+      static contextType = AuthContext
+
     render() {
+
+
+        const {handleSessionUpdate} = this.context
+
 
         if (this.state.isLoggedIn || sessionStorage.getItem('username'))
             return <Redirect to="teaching"/>
@@ -48,7 +57,7 @@ class Login extends Component {
             <Fragment>
                 <div className="login_form center">
                     <h2 className="brand-logo center" id="label_lgn">Login</h2>
-                    <form onSubmit={e => this.submitUser(e)}>
+                    <form onSubmit={e => this.submitUser(e, handleSessionUpdate)}>
                         {/* <input type="text" name="email" className="login_txt" placeholder="email" onChange={this.handleFormChange}/><br/>
                         <input type="text" name="password" className="login_txt" placeholder="password" onChange={this.handleFormChange}/><br/>
                         <button type="submit" className="login_btn">Login</button> */}
