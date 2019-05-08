@@ -51,7 +51,7 @@ class Header extends Component {
                     <div className="nav-wrapper">
                         <div>
                             <img src={process.env.PUBLIC_URL + "/images/brand.png"}></img>
-                            <span className="brand-logo center">RAMAIAH INSTITUTE OF TECHNOLOGY</span>
+                            <span className="brand-logo center" id="tag">RAMAIAH INSTITUTE OF TECHNOLOGY</span>
                             <ul className="right">
                                 <li>
                                     <span 

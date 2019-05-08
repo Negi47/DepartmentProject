@@ -56,7 +56,7 @@ class Login extends Component {
         return(
             <Fragment>
                 <div className="login_form center">
-                    <h2 className="brand-logo center" id="label_lgn">Login</h2>
+                    <h3 className="brand-logo center" id="label_lgn" >Login</h3>
                     <form onSubmit={e => this.submitUser(e, handleSessionUpdate)}>
                         {/* <input type="text" name="email" className="login_txt" placeholder="email" onChange={this.handleFormChange}/><br/>
                         <input type="text" name="password" className="login_txt" placeholder="password" onChange={this.handleFormChange}/><br/>

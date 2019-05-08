@@ -189,8 +189,8 @@ class TeachingDiary extends Component{
                             
                             {/* Time Table */}
                             <br/>
-                            <div className="second_div">
-                                <table id="table">
+                            <div>
+                                <table>
                                 <tbody>
                                     <tr>
                                         <th></th>
@@ -204,7 +204,11 @@ class TeachingDiary extends Component{
                                     </tr>    
                                     <tr>
                                         <td>Monday</td>
-                                        <td><input type="checkbox" className="check" name="mon" onClick={this.handleFormChange}/></td>
+                                        <label>
+                                            <input type="checkbox" />
+                                            <span>Yellow</span>
+                                        </label>
+                                        <td><input type="checkbox" className="check" name="mon" value="9:00-9:55" onChange={this.handleFormChange}/></td>
                                         <td><input type="checkbox" className="check" name="mon" value="9:55-10:50" onChange={this.handleFormChange}/></td>
                                         <td><input type="checkbox" className="check" name="mon" value="11:05-12:00" onChange={this.handleFormChange}/></td>
                                         <td><input type="checkbox" className="check" name="mon" value="12:00-12:55" onChange={this.handleFormChange}/></td>
