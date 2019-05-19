@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import {Redirect} from 'react-router-dom'
 import "../../styles/TeachingDiary.css"
+import { AuthContext } from '../../Context/Context';
 
 
 class TeachingDiary extends Component{
@@ -9,7 +10,9 @@ class TeachingDiary extends Component{
     state = {
         semester: '',
         section: '',
-        term: '',
+        fromterm: '',
+        toterm: '',
+        subject: '',
         credits: '',
         facultyname: '',
         totalhours: '',
@@ -22,6 +25,16 @@ class TeachingDiary extends Component{
         isSubmitted: null
     }
 
+    // componentDidMount() {
+    //     if (window.performance) {
+    //         if (performance.navigation.type == 1) {
+    //           alert( "This page is reloaded" );
+    //         } else {
+    //           alert( "This page is not reloaded");
+    //         }
+    //       }
+    // }
+
     handleFormChange = (e) => {
 
         console.log('handleFormChange', e.target.type);
@@ -31,7 +44,7 @@ class TeachingDiary extends Component{
                 switch (e.target.name) {
                     case "mon":
                         this.setState({
-                            mon: false
+                            mon: [...this.state.mon, e.target.value]
                         })
                         break;
 
@@ -128,11 +141,14 @@ class TeachingDiary extends Component{
     submitUser = (e) => {
         e.preventDefault()
 
+
         axios.post('/teaching/addteachingdiary', {
             
             semester: this.state.semester,
             section: this.state.section,
-            term: this.state.term,
+            fromterm: this.state.fromterm,
+            toterm: this.state.toterm,
+            subject: this.state.subject,
             credits: this.state.credits,
             facultyname: this.state.facultyname,
             totalhours: this.state.totalhours,
@@ -157,7 +173,7 @@ class TeachingDiary extends Component{
 
       }
 
-
+      static contextType = AuthContext
     render() {
 
         if(!sessionStorage.getItem('username'))
@@ -166,26 +182,58 @@ class TeachingDiary extends Component{
         if(this.state.isSubmitted)
             return <Redirect to="teachingtiming" />
 
+
+        const {selected_dept} = this.context
+
         return(
             <div>
                 <center>
-                    <label>Department of Computer pplication</label><br/>
-                    <label className="teaching">GENERATE TEACHING DIARY</label>
+                    <h6 className="teaching">Department of Computer pplication</h6>
+                    <h6 className="teaching">GENERATE TEACHING DIARY</h6>
+
+                    <h3>{selected_dept}</h3>
                 </center>
-                <div className="first_div">
+                <div className="first_div row">
                     <form onSubmit={e => this.submitUser(e)}>
-                        <label className="diary_text">Semester: </label>
-                            <input type="text" name="semester" onChange={this.handleFormChange} />
-                        <label className="diary_text">Section: </label>
-                            <input type="text" name="section" onChange={this.handleFormChange} />
-                        <label className="diary_text">Term: </label>
-                            <input type="text" name="term" onChange={this.handleFormChange} />
-                        <label className="diary_text">Credits: </label>
-                            <input type="text" name="credits" onChange={this.handleFormChange} />
-                        <label className="diary_text">Name of the faculty: </label>
+                    <div className="row">
+                        <div className="input-field col s4 ">
+                            <label className="diary_text">Name of the faculty: </label>
                             <input type="text" name="facultyname" onChange={this.handleFormChange} />
-                        <label className="diary_text">Total no. of hours: </label>
+                        </div>
+                        <div className="input-field col s4">
+                            <label className="diary_text">Semester: </label>
+                            <input type="text" name="semester" onChange={this.handleFormChange} />
+                        </div>
+                        <div className="input-field col s4">
+                            <label className="diary_text">Section: </label>
+                            <input type="text" name="section" onChange={this.handleFormChange} />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="input-field col s4">   
+                            <label className="diary_text">Subject: </label>
+                            <input type="text" name="subject" onChange={this.handleFormChange} />
+                        </div>
+                        <div className="input-field col s4">
+                            <label className="diary_text">FromTerm: </label>
+                            <input type="date" name="fromterm" onChange={this.handleFormChange} />
+                        </div>
+                        <div className="input-field col s4">
+                            <label className="diary_text">To Term: </label>
+                            <input type="date" name="toterm" onChange={this.handleFormChange} />
+                        </div>
+                        
+                    </div>
+                    <div className="row">
+                        <div className="input-field col s5">   
+                            <label className="diary_text">Credits: </label>
+                            <input type="text" name="credits" onChange={this.handleFormChange} />
+                        </div>   
+                        <div className="input-field col s5">
+                            <label className="diary_text">Total no. of hours: </label>
                             <input type="text" name="totalhours" onChange={this.handleFormChange} />
+                        </div>     
+                    </div>
                             
                             {/* Time Table */}
                             <br/>
@@ -204,72 +252,365 @@ class TeachingDiary extends Component{
                                     </tr>    
                                     <tr>
                                         <td>Monday</td>
-                                        <label>
-                                            <input type="checkbox" />
-                                            <span>Yellow</span>
-                                        </label>
-                                        <td><input type="checkbox" className="check" name="mon" value="9:00-9:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="mon" value="9:55-10:50" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="mon" value="11:05-12:00" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="mon" value="12:00-12:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="mon" value="1:45-2:40" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="mon" value="2:40-3:35" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="mon" value="3:55-4:30" onChange={this.handleFormChange}/></td>
+                                        
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="mon" value="9:00-9:55" onChange={this.handleFormChange} />
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="mon" value="9:55-10:50" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="mon" value="11:05-12:00" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                            
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="mon" value="12:00-12:55" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="mon" value="1:45-2:40" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="mon" value="2:40-3:35" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="mon" value="3:55-4:30" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Tuesday</td>
-                                        <td><input type="checkbox" className="check" name="tue" value="9:00 - 9:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="tue" value="9:55-10:50" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="tue" value="11:05-12:00" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="tue" value="12:00-12:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="tue" value="1:45-2:40" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="tue" value="2:40-3:35" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="tue" value="3:55-4:30" onChange={this.handleFormChange}/></td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="tue" value="9:00 - 9:55" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="tue" value="9:55-10:50" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="tue" value="11:05-12:00" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="tue" value="12:00-12:55" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="tue" value="1:45-2:40" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="tue" value="2:40-3:35" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="tue" value="3:55-4:30" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Wensday</td>
-                                        <td><input type="checkbox" className="check" name="wed" value="9:00-9:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="wed" value="9:55-10:50" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="wed" value="11:05-12:00" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="wed" value="12:00-12:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="wed" value="1:45-2:40" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="wed" value="2:40-3:35" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="wed" value="3:55-4:30" onChange={this.handleFormChange}/></td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="wed" value="9:00-9:55" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="wed" value="9:55-10:50" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="wed" value="11:05-12:00" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="wed" value="12:00-12:55" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="wed" value="1:45-2:40" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="wed" value="2:40-3:35" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="wed" value="3:55-4:30" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Thursday</td>
-                                        <td><input type="checkbox" className="check" name="thu" value="9:00 - 9:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="thu" value="9:55-10:50" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="thu" value="11:05-12:00" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="thu" value="12:00-12:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="thu" value="1:45-2:40" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="thu" value="2:40-3:35" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="thu" value="3:55-4:30" onChange={this.handleFormChange}/></td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="thu" value="9:00 - 9:55" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="thu" value="9:55-10:50" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="thu" value="11:05-12:00" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label >
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="thu" value="12:00-12:55" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="thu" value="1:45-2:40" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="thu" value="2:40-3:35" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper"> 
+                                                    <input type="checkbox" className="filled-in" name="thu" value="3:55-4:30" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Friday</td>
-                                        <td><input type="checkbox" className="check" name="fri" value="9:00 - 9:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="fri" value="9:55-10:50" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="fri" value="11:05-12:00" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="fri" value="12:00-12:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="fri" value="1:45-2:40" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="fri" value="2:40-3:35" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="fri" value="3:55-4:30" onChange={this.handleFormChange}/></td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="fri" value="9:00 - 9:55" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="fri" value="9:55-10:50" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="fri" value="11:05-12:00" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="fri" value="12:00-12:55" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="fri" value="1:45-2:40" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="fri" value="2:40-3:35" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="fri" value="3:55-4:30" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Saturday</td>
-                                        <td><input type="checkbox" className="check" name="sat" value="9:00 - 9:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="sat" value="9:55-10:50" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="sat" value="11:05-12:00" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="sat" value="12:00-12:55" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="sat" value="1:45-2:40" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="sat" value="2:40-3:35" onChange={this.handleFormChange}/></td>
-                                        <td><input type="checkbox" className="check" name="sat" value="3:55-4:30" onChange={this.handleFormChange}/></td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="sat" value="9:00 - 9:55" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="sat" value="9:55-10:50" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="sat" value="11:05-12:00" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="sat" value="12:00-12:55" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="sat" value="1:45-2:40" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>    
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="sat" value="2:40-3:35" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="table_checkbox">
+                                                <label className="valign-wrapper">
+                                                    <input type="checkbox" className="filled-in" name="sat" value="3:55-4:30" onChange={this.handleFormChange}/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
-                        <button type="submit" className="sub_btn">Submit</button>
+                            <br/>
+                        <button type="submit" className="sub_btn waves-effect waves-light btn">Submit</button>
                     </form>
                 </div>
                 

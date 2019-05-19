@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {NavLink} from 'react-router-dom'
 import "../../styles/Header.css"
 import axios from 'axios';
 import $ from 'jquery'
@@ -14,16 +15,20 @@ class Header extends Component {
 
     logout = () => {
         sessionStorage.removeItem('username')
-        this.setState({isSession: false})
+        this.props.removeSession()
     }
 
     changeLogoutVisible = () => {
         if (!this.state.isVisible) {
+            console.log('lohoud visible: ', this.state.isVisible)
             document.addEventListener('click', this.outsideMenuClick)
         }
             
-        else
+        else {
+            console.log('lohoud visible: ', this.state.isVisible)
             document.removeEventListener('click', this.outsideMenuClick)
+
+        }
 
         this.setState({isVisible: !this.state.isVisible})
     }
@@ -43,20 +48,30 @@ class Header extends Component {
                 {
                     isSession ?
                         <ul className="logoutbtn" style={this.state.isVisible ? {display: "block"} : null}>
-                            <li><button onClick={this.logout}  >Logout</button></li>
+                            <li><button onClick={() => this.logout(isSession)}  >Logout</button></li>
                         </ul> :
                          null
                 }
                 <nav className="Heder">
                     <div className="nav-wrapper">
                         <div>
-                            <img src={process.env.PUBLIC_URL + "/images/brand.png"}></img>
+                            <img src={process.env.PUBLIC_URL + "/images/brand.png"} className="responsive-img"></img>
                             <span className="brand-logo center" id="tag">RAMAIAH INSTITUTE OF TECHNOLOGY</span>
                             <ul className="right">
-                                <li>
-                                    <span 
-                                        onClick={this.changeLogoutVisible}><i className="material-icons">account_circle</i></span>
-                                </li>
+                                {
+                                    isSession ?
+                                    
+                                        <li>
+                                            <span className="valign-wrapper" onClick={() => this.changeLogoutVisible()} >
+                                                <i className="material-icons" style={{fontSize: '45px'}}>account_circle</i>
+                                            </span>
+                                        </li> :
+                                        
+                                        <li>
+                                            <NavLink to="/login" style={{fontSize: 'x-large',fontFamily: 'serif'}}>Login</NavLink>
+                                        </li> 
+                                }
+                                
                             </ul>
                         </div>
                         

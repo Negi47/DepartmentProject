@@ -1,10 +1,21 @@
 .login_form{
     border: 1px solid black;
-    margin: 5% 0% 0% 36%;
+    margin: 8% 0% 0% 30%;
     padding: 1% 4% 3% 0%;
-    width: 40%;
+    width: 26%;
     background-color: white;
     box-shadow: 0 0 4px #adb5bd;
+}
+
+.login{
+    display: flex;
+}
+
+.divloginright{
+    margin: auto;
+    margin-left: 2%;
+    margin-top: 7%;
+    padding: 0.8rem;
 }
 
 #label_lgn {

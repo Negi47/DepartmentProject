@@ -9,7 +9,9 @@ router.post('/addteachingdiary', (req,res) => {
     const newTeaching = new TeachingModel({
         semester: req.body.semester,
         section: req.body.section,
-        term: req.body.term,
+        fromterm: req.body.fromterm,
+        toterm: req.body.toterm,
+        subject: req.body.subject,
         credits: req.body.credits,
         facultyname: req.body.facultyname,
         totalhours : req.body.totalhours,
@@ -25,8 +27,12 @@ router.post('/addteachingdiary', (req,res) => {
 
 
 router.get('/getTeachingDetails/:username', (req, res) => {
-    TeachingModel.findOne({username: req.params.username})
-        .then(data => res.send(data))
+    console.log('loggedin username: ', req.params.username)
+    TeachingModel.find({username: req.params.username}).sort({_id: -1}).limit(1)
+        .then(data => {
+            console.log('data from getTeachingDetails: ', data)
+            res.send(data)
+        })
         .catch(err => res.send(err))
 })
 

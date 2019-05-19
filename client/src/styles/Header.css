@@ -8,23 +8,24 @@
     font-size: x-large;
     margin-left: 340px;
 }
+
 img{
-    width: 17%;
-    padding-top: 0.6%;
+    width: 13%;
+    padding-top: 0.4%;
     margin-left: 0.5%;
 }
 
 .logoutbtn {
     position: absolute;
-    top: 60px;
-    right: 10px;
+    top: 71px;
+    right: 4px;
     display: none;
-    display: block;
     padding: 15px;
     border: 1px solid;
-    background-color: #d4cbcb;
-    box-shadow: 0px 0px 2px 0px black;
+    background-color: #dedede26;
+    box-shadow: 0px 0px 2px 0px #0000002e;
     margin: unset;
+    
 }
 
 .Header{
@@ -33,6 +34,10 @@ img{
 }
 
 #tag{
-    width: 100%;
-    left: 54%;
+    width: 43%;
+    left: 49%;
+}
+
+.material-icons{
+    font-size:  42px;
 }

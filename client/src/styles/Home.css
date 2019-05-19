@@ -1,0 +1,46 @@
+.caousel-below{
+    display: flex;
+    width: 70%;
+    justify-content: center;
+}
+.facts{
+    color: white;
+    font-family: serif;
+    font-weight: 500;
+    font-size: 30px;
+    padding: unset;
+    margin: unset;
+    
+}
+.quick {
+    margin-top: 20%;
+    margin-left: 10%;
+}
+.inside-fact{
+    margin-top: 8%;
+    padding: 0% 0% 4% 1%;
+    line-height: 1.2;
+    padding-left: 9px;
+}
+.col{
+    color: white;
+}
+
+.row{
+    padding-bottom: 1%;
+}
+
+.inside-carousel{
+    display: flex;
+    margin-top: 14%;
+    margin-left: 12%;
+    color: white;
+    font-size: xx-large;
+    font-style: inherit;
+    font-weight: 500;
+    font-family: serif;
+}
+.lightbox{
+    height:100%;
+    background-color: #2b2a2d6b;
+}

@@ -17,6 +17,7 @@ router.post('/adduser', (req, res) => {
     console.log(`email: ${req.body.email}, password: ${req.body.password}`)
 
     const newUser = new UserModel({
+        facultyname: req.body.facultyname,
         username: req.body.username,
         email: req.body.email,
         password: req.body.password

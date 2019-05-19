@@ -1,9 +1,9 @@
 .signup_form{
     
     border: 1px solid black;
-    margin: 5% 0% 0% 36%;
+    margin: 5% 0% 0% 33%;
     padding: 1% 4% 3% 0%;
-    width: 39%;
+    width: 34%;
     background-color: white;
     box-shadow: 0 0 4px #adb5bd;
 }
@@ -11,6 +11,7 @@
 #signup_label{
     margin-left: 14%;
     padding: inherit;
+    font-family: serif;
     /* margin-left: 19%; */
     
 }

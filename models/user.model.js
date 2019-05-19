@@ -2,7 +2,11 @@ const mongoose = require('mongoose')
 const {Schema} = mongoose
 
 const UserSchema = new Schema({
-    
+
+    facultyname: {
+        type: String,
+        required: true,
+    },
     username: {
         type: String,
         required: true

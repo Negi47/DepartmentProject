@@ -6,6 +6,7 @@ import "../../styles/Signup.css"
 class Signup extends Component {
 
     state = {
+        facultyname: '',
         username: '',
         email: '',
         password: '',
@@ -30,6 +31,7 @@ class Signup extends Component {
         // .catch(err => console.log(err))
 
         axios.post('/user/adduser', {
+            facultyname: this.state.facultyname,
             username: this.state.username,
             email: this.state.email,
             password: this.state.password
@@ -54,26 +56,26 @@ class Signup extends Component {
 
             <div>
                 <div className ="signup_form center">
-                    <center><h3 className="brand-logo center" id="signup_label">Signup</h3></center><br></br>
+                    <center><h4 className="brand-logo center" id="signup_label">Signup</h4></center><br></br>
                     <form onSubmit={e => this.submitUser(e)}>
                         <div className="input-field col s6">
                             <i className="material-icons prefix" id="icon">person</i>
-                            <input id="icon_prefix" type="text" className="validate" placeholder="username" name="username" onChange={this.handleFormChange} /><br/>
-                            <label for="icon_prefix" id="signup_text">Name</label>
+                            <input id="icon_prefix" type="text" className="validate" name="facultyname" onChange={this.handleFormChange} /><br/>
+                            <label for="icon_prefix" id="signup_text">Faculty Name</label>
                         </div>
                         <div className="input-field col s6">
                             <i className="material-icons prefix" id="icon">person</i>
-                            <input id="icon_prefix" type="text" className="validate" placeholder="username" name="username" onChange={this.handleFormChange} /><br/>
+                            <input id="icon_prefix" type="text" className="validate" name="username" onChange={this.handleFormChange} /><br/>
                             <label for="icon_prefix" id="signup_text">Username</label>
                         </div>
                         <div className="input-field col s6">
                             <i className="material-icons prefix" id="icon">email</i>
-                            <input id="icon_prefix" type="text" className="validate" placeholder="email" name="email" onChange={this.handleFormChange} /><br/>
+                            <input id="icon_prefix" type="text" className="validate" name="email" onChange={this.handleFormChange} /><br/>
                             <label for="icon_prefix" id="signup_text">Email Id</label>
                         </div>
                         <div className="input-field col s6">
                             <i className="material-icons prefix" id="icon">remove_red_eye</i>
-                            <input id="icon_prefix" type="text" className="validate" placeholder="password" name="password" onChange={this.handleFormChange} /><br/>
+                            <input id="icon_prefix" type="text" className="validate" name="password" onChange={this.handleFormChange} /><br/>
                             <label for="icon_prefix" id="signup_text">Password</label>
                         </div>
                     <button type="submit" className="waves-effect waves-light btn" id="lgn_button">Register</button>
