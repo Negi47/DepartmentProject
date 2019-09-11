@@ -5,11 +5,19 @@ const TeachingSchema =  new Schema ({
 
     semester: {
         type: String,
-        // required: true
+        required: true
+    },
+    department:{
+        type: String,
+        required: true
+    },
+    batch:{
+        type: String,
+        required: true
     },
     section: {
         type: String,
-        // required: true
+        required: true
     },
     fromterm: {
         type: String,
@@ -21,19 +29,23 @@ const TeachingSchema =  new Schema ({
     },
     subject: {
         type: String,
-        // required: true
+        required: true
     },
     credits: {
         type: String,
-        // required: true
+        required: true
+    },
+    creditType: {
+        type: String,
+        required : true
     },
     facultyname: {
         type: String,
-        // required: true
+        required: true
     },
     totalhours: {
         type: String,
-        // required: true
+        required: true
     },
     days: {
         mon: [String],

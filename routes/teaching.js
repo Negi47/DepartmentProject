@@ -9,10 +9,13 @@ router.post('/addteachingdiary', (req,res) => {
     const newTeaching = new TeachingModel({
         semester: req.body.semester,
         section: req.body.section,
+        department: req.body.department,
+        batch: req.body.batch,
         fromterm: req.body.fromterm,
         toterm: req.body.toterm,
         subject: req.body.subject,
         credits: req.body.credits,
+        creditType: req.body.creditType,
         facultyname: req.body.facultyname,
         totalhours : req.body.totalhours,
         days: req.body.days,

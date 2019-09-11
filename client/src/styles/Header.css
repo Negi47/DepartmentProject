@@ -17,15 +17,27 @@ img{
 
 .logoutbtn {
     position: absolute;
-    top: 71px;
+    top: 67px;
     right: 4px;
     display: none;
-    padding: 15px;
+    padding: 1em !important;
     border: 1px solid;
     background-color: #dedede26;
-    box-shadow: 0px 0px 2px 0px #0000002e;
+    box-shadow: 0 0 1px 0px #0000004f;
     margin: unset;
-    
+    font-family: serif;
+    font-size: 19px;
+    font-weight: 500;
+}
+
+.logoutbtn > li {
+    padding: 5px 0;
+}
+
+.logoutbtn > li > button {
+    border: none;
+    background-color: transparent;
+    padding: 0;
 }
 
 .Header{
@@ -34,8 +46,9 @@ img{
 }
 
 #tag{
-    width: 43%;
-    left: 49%;
+    width: 63%;
+    left: 52%;
+    font-family: serif;
 }
 
 .material-icons{

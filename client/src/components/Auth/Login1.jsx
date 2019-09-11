@@ -1,3 +1,4 @@
+    
 import React, {Component,Fragment} from 'react'
 import axios from 'axios'
 import {Redirect} from 'react-router-dom'
@@ -12,12 +13,8 @@ class Login extends Component {
         email: '',
         password: '',
         popupmsg: null,
-        isLoggedIn: null,
-        // isPasswordMode: true
+        isLoggedIn: null
     }
-
-
-    // togglePasswordMode = () => this.setState({isPasswordMode: !this.state.isPasswordMode})
 
     handleFormChange = (e) => {
         this.setState({
@@ -63,8 +60,7 @@ class Login extends Component {
                 <div className="login">
                     
                     <div className="login_form center">
-                        <h3 className="brand-logo center" id="label_lgn" style={{fontFamily : 'serif'}}>Login</h3>
-
+                        <h3 className="brand-logo center" id="label_lgn" >Login</h3>
                         <form onSubmit={e => this.submitUser(e, handleSessionUpdate)}>
                             {/* <input type="text" name="email" className="login_txt" placeholder="email" onChange={this.handleFormChange}/><br/>
                             <input type="text" name="password" className="login_txt" placeholder="password" onChange={this.handleFormChange}/><br/>
@@ -75,40 +71,15 @@ class Login extends Component {
                             <input id="icon_prefix" type="text" name="email" className="validate" onChange={this.handleFormChange}/><br/>
                             <label htmlFor="icon_prefix">email/username</label>
                         </div>
-                        
                         <div className="input-field col s6">
                             <i className="material-icons prefix" id="icon">remove_red_eye</i>
                             <input id="icon_password" type="password" name="password" className="validate" onChange={this.handleFormChange}/><br/>
                             <label htmlFor="icon_password">password</label>
                         </div>
 
-                        {/* <div className="valign-wrapper" style={{marginLeft: '2.2em'}}>
-                            <div className="input-field col s6">
-                                {/* <i className="material-icons prefix" id="icon">remove_red_eye</i> */}
-                                {/* <input id="icon_password" type={this.state.isPasswordMode ? "password" : "text"} name="password" className="validate" onChange={this.handleFormChange}/><br/>
-                                <label htmlFor="icon_password">password</label>
-                            </div>
-                            <button style={{border: 'none', backgroundColor: 'transparent', marginLeft: '1em'}}
-                                onClick={this.togglePasswordMode}
-                                type="button">
-                                <i className="material-icons">
-                                    {
-                                        this.state.isPasswordMode ? "visibility" : "visibility_off"
-                                    }
-                                </i>
-                            </button> */}
-                        {/* </div> */} 
-
                         <button type="submit" className="waves-effect waves-light btn" id="lgn_button">Login</button>
                         
                         {/* <a href=""></a> */}
-
-                        {
-                            this.state.popupmsg ?
-                            <p style={{marginBottom: 0}}> {this.state.popupmsg} </p> :
-                            null
-                        }
-
 
                         </form>
                     </div>
@@ -121,7 +92,12 @@ class Login extends Component {
                     </div>
                 </div>
 
-                
+                {
+                    this.state.popupmsg ?
+                    <div> {this.state.popupmsg} </div> :
+                    null
+
+                }
             </Fragment>
         )
     }

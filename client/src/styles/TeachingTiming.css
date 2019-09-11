@@ -1,13 +1,18 @@
 .timing-table, .timing-td-table{
-    width: 40%;
+    /* width: 40%; */
     margin-top: 2%;
-    margin-left: 2%; 
-    border: 1px solid #00000030;
-    padding: 1% 0% 1% 2%;
+    /* margin-left: 2%;  */
+    border: 1px solid grey;
+    padding: 1%;
+    font-family: serif;
+    font-size: small;
+    font-weight: 500;
 }
 
-td,th {
-    text-align: unset;
+.thtag {
+    text-align: center;
+    border: 1px solid grey;
+    padding: 0 !important;
 }
 
 .Main-head{

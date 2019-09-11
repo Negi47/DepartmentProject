@@ -34,3 +34,6 @@ table, th, td, tr {
     display: flex;
     justify-content: center;
 }
+.teaching{
+    font-family: serif;
+}

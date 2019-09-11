@@ -48,6 +48,7 @@ class Header extends Component {
                 {
                     isSession ?
                         <ul className="logoutbtn" style={this.state.isVisible ? {display: "block"} : null}>
+                            <li>{sessionStorage.getItem('username')}</li>
                             <li><button onClick={() => this.logout(isSession)}  >Logout</button></li>
                         </ul> :
                          null
@@ -57,22 +58,24 @@ class Header extends Component {
                         <div>
                             <img src={process.env.PUBLIC_URL + "/images/brand.png"} className="responsive-img"></img>
                             <span className="brand-logo center" id="tag">RAMAIAH INSTITUTE OF TECHNOLOGY</span>
-                            <ul className="right">
-                                {
-                                    isSession ?
-                                    
+
+                            {
+                                isSession ? 
+
+                                    <ul className="right">
                                         <li>
                                             <span className="valign-wrapper" onClick={() => this.changeLogoutVisible()} >
                                                 <i className="material-icons" style={{fontSize: '45px'}}>account_circle</i>
                                             </span>
-                                        </li> :
-                                        
+                                        </li>
+                                    </ul> :
+
+                                    <ul className="right">
                                         <li>
                                             <NavLink to="/login" style={{fontSize: 'x-large',fontFamily: 'serif'}}>Login</NavLink>
                                         </li> 
-                                }
-                                
-                            </ul>
+                                    </ul>
+                            }
                         </div>
                         
                         {/* <a href="#" class="brand-logo center">Logo</a> */}
